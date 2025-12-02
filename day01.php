@@ -104,5 +104,3 @@ function input(): string
 {
     return file_get_contents(pathinfo(__FILE__, PATHINFO_FILENAME) . '-input.txt');
 }
-
-?>
