@@ -1,9 +1,9 @@
 <?php
 
-//echo "Part 1 sample expected: 357 actual: " . compute(sample()) . "\n";
-//echo "Part 1 actual expected: 17155 actual: " . compute(input()) . "\n";
-echo "Part 2 sample expected: xxx actual:" . compute2(sample()) . "\n";
-//echo "Part 2 actual expected: xxx actual: " . compute(input()) . "\n";
+echo "Part 1 sample expected: 357 actual: " . compute(sample()) . "\n";
+echo "Part 1 actual expected: 17155 actual: " . compute(input()) . "\n";
+echo "Part 2 sample expected: 3121910778619 actual:" . compute2(sample()) . "\n";
+echo "Part 2 actual expected: 169685670469164 actual: " . compute2(input()) . "\n";
 
 function compute(string $input): string {
     $banks = explode("\n", $input);
@@ -43,7 +43,13 @@ function compute2(string $input): string {
         $pack = '';
 
         while ($digits > 0) {
-            $remaining_banks = array_slice($batteries, 0, ($digits - 1) * -1);
+            $splice = ($digits - 1) * -1;
+            $splice = $splice === 0 ? count($batteries) : $splice;
+            $remaining_banks = array_slice($batteries, 0, $splice);
+//            var_dump('b' . implode($batteries));
+//            var_dump('r' . implode($remaining_banks));
+//            var_dump('d' . $digits);
+//            var_dump('s' . $splice);
             if (empty($remaining_banks)) {
                 $pack .= $batteries[0];
                 break;
@@ -55,7 +61,6 @@ function compute2(string $input): string {
             $digits -= 1;
         }
 
-        var_dump($pack);
         $jolts += (int)$pack;
     }
 
