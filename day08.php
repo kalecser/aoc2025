@@ -1,9 +1,9 @@
 <?php
 
-echo "Part 1 sample expected: 40 actual: " . compute(sample()) . "\n";
-echo "Part 1 actual expected: 57970 actual: " . compute(input(), 1000) . "\n";
-//echo "Part 2 sample expected: xxx actual:" . compute(sample()) . "\n";
-//echo "Part 2 actual expected: xxx actual: " . compute(input()) . "\n";
+echo "Part 1 sample expected: 40 actual: " .        compute(sample(),   max_connections: 10) . "\n";
+echo "Part 1 actual expected: 57970 actual: " .     compute(input(),    max_connections: 1000) . "\n";
+echo "Part 2 sample expected: 25272 actual:" .      compute(sample(),   max_connections: 100000) . "\n";
+echo "Part 2 actual expected: 8520040659 actual: " .   compute(input(), max_connections: 1000000) . "\n";
 
 function compute(string $input, int $max_connections = 10): string {
     $junction_boxes = parseJunctionBoxes($input);
@@ -43,6 +43,11 @@ function compute(string $input, int $max_connections = 10): string {
                 $circuitIndices[$node] = $indexA;
             }
         }
+
+        if (count($circuits[$indexA]) === count($junction_boxes)) {
+            return $junction_boxes[$a][0] * $junction_boxes[$b][0];
+        }
+
 
         $how_many++;
     }
